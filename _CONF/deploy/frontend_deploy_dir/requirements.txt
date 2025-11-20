@@ -1,0 +1,23 @@
+# multiservices
+numpy
+pandas
+scikit-learn
+xgboost
+joblib
+dotenv
+# AWS S3
+boto3
+
+#mlflow
+mlflow
+
+# FastAPI
+fastapi
+uvicorn
+python-multipart
+
+# Streamlit
+streamlit
+
+# Display
+plotly

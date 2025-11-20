@@ -1,0 +1,24 @@
+[theme]
+base = "dark"
+
+# Primary color (green from hover effects)
+primaryColor = "#10b981"
+
+# Background color (middle tone of the gradient)
+backgroundColor = "#4f5d75"
+
+# Secondary background color (lighter, for containers/sidebar)
+secondaryBackgroundColor = "#5a6b8a"
+
+# Text color (white)
+textColor = "#ffffff"
+
+# Font
+font = "sans serif"
+
+[server]
+headless = true
+port = 8501
+
+[browser]
+gatherUsageStats = false

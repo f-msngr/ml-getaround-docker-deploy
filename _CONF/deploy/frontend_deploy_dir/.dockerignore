@@ -1,0 +1,7 @@
+# Ignore tous les dossiers __pycache__ à tous les niveaux
+__pycache__/
+**/__pycache__/
+
+# Ignore tous les fichiers compilés Python, peu importe leur emplacement
+*.py[cod]
+**/*.py[cod]

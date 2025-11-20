@@ -1,0 +1,114 @@
+                    GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
+
+Copyright (C) 2025 Fabthenabab
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+
+Preamble
+
+The GNU General Public License is a free, copyleft license for
+software and other kinds of works.
+
+The licenses for most software and other practical works are designed
+to take away your freedom to share and change the works. By contrast,
+the GNU General Public License is intended to guarantee your freedom to
+share and change all versions of a program—to make sure it remains free
+software for all its users. We, the Free Software Foundation, use the
+GNU General Public License for most of our software; it applies also to
+any other work released this way by its authors. You can apply it to
+your programs, too.
+
+TERMS AND CONDITIONS
+
+0. Definitions.
+
+"This License" refers to version 3 of the GNU General Public License.
+
+"Copyright" also means copyright-like laws that apply to other kinds of
+works, such as semiconductor masks.
+
+"The Program" refers to any copyrightable work licensed under this License.
+
+1. Source Code.
+
+The "source code" for a work means the preferred form of the work for
+making modifications to it.
+
+2. Basic Permissions.
+
+All rights granted under this License are granted for the term of
+copyright on the Program, and are irrevocable provided the stated
+conditions are met.
+
+3. Copying, Distribution, and Modification.
+
+You may copy and distribute verbatim copies of the Program's
+source code as you receive it, in any medium, provided that you
+conspicuously and appropriately publish on each copy an appropriate
+copyright notice; keep intact all notices stating that this License
+and any non-permissive terms apply to the code; keep intact all
+notices of the absence of any warranty; and give any other recipients
+a copy of this License along with the Program.
+
+You may modify your copy or copies of the Program or any portion
+of it, thus forming a work based on the Program, and copy and
+distribute such modifications under the terms of Section 4,
+provided that you also meet all of these conditions:
+
+  a) The modified work must carry prominent notices stating that
+  you changed the files and the date of any change.
+
+  b) You must license the entire work, as a whole, under this License
+  to anyone who comes into possession of a copy. This License
+  applies to the whole work, and all its parts, regardless of how
+  they are packaged.
+
+4. Conveying Modified Source Versions.
+
+You may convey a work based on the Program, or the modifications
+to produce it from the Program, in source code form under the terms
+of Section 3, provided that you also meet all of these conditions:
+
+  a) The work must carry prominent notices stating that you
+  modified it, and giving a relevant date.
+
+  b) The work must carry prominent notices stating that it is
+  released under the GNU GPLv3.
+
+5. Conveying Non-Source Forms.
+
+You may convey a covered work in object code form under the terms
+of Sections 4 and 6, provided that you also meet all of these conditions:
+
+  a) Accompany it with the complete corresponding machine-readable
+  source code, which must be distributed under the terms of this License.
+
+  b) Accompany it with a written offer, valid for at least three years,
+  to give any third party the source code.
+
+6. Additional Terms.
+
+You may not impose any further restrictions on the recipients' exercise
+of the rights granted herein.
+
+7. Termination.
+
+You may not propagate or modify a covered work except as expressly
+provided under this License. Any attempt otherwise is void, and will
+automatically terminate your rights under this License.
+
+8. Disclaimer of Warranty.
+
+There is no warranty for the program, to the extent permitted by
+applicable law. Except when otherwise stated in writing the copyright
+holders and/or other parties provide the program "as is" without warranty
+of any kind, either expressed or implied.
+
+9. Limitation of Liability.
+
+In no event shall the copyright holder or any other party who
+modifies and/or conveys the program be liable for any damages
+arising from the use of the program.
+
+For the full text, see: <https://www.gnu.org/licenses/gpl-3.0.txt>

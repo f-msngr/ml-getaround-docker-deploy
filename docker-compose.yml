@@ -1,0 +1,146 @@
+services:
+  nginx:
+    image: nginx:latest                     # Use this image by default
+    # Runtime configuration
+    container_name: ${NGINX_CONTAINER}
+    # Networking & volumes
+    networks:
+      - app-network
+    ports:
+      - "${PORT_NGINX_EXTERNAL}:${PORT_NGINX_EXPOSED}"
+      # - "443:443"                         # No support for https by now
+    volumes:
+      - ./_nginx-server/default.conf:/etc/nginx/conf.d/default.conf
+      - ./_nginx-server/html:/etc/nginx/html
+    depends_on:
+      - api
+      - api-backend
+      - dashboard
+    restart: unless-stopped
+  
+  api:
+    # Build configuration
+    build:
+      context: .
+      dockerfile: ./_fastapi-server/Dockerfile
+      args:
+        PORT_FASTAPI_EXPOSED: ${PORT_FASTAPI_EXPOSED}         # make variable callable during build in Dockerfile
+    image: ${FASTAPI_IMAGE}
+    # Runtime configuration
+    container_name: ${FASTAPI_CONTAINER}
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PORT_FASTAPI_EXPOSED=${PORT_FASTAPI_EXPOSED}
+      - URL_API=http://api:${PORT_FASTAPI_EXTERNAL} # overrides URL_API value set in .env
+      - PROJECT_ROOT=/app
+      - PROJECT_NAME=${PROJECT_NAME}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
+      - AWS_SECRET_KEY=${AWS_SECRET_KEY}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET}
+      - TRACKING_URI=http://mlflow-tracking:${PORT_MLFLOW_TRACKING_EXTERNAL}   # overrides TRACKING_URI value set in .env - used in streamlit.py
+    # Networking & volumes
+    networks:
+      - app-network
+    ports:
+      - "${PORT_FASTAPI_EXTERNAL}:${PORT_FASTAPI_EXPOSED}"
+    volumes:
+      - ./_fastapi-server/src:/app/api/src           # allows API hot reload
+      - ./_fastapi-servers-shared/src:/app/api/src/shared    # mount shared routes - create shared dir if notit doesn't exist
+      - ./data:/app/data                     # access data/ if data/ used in local dev
+      - ./models:/app/models                 # access joblib models/ if models/ used in local dev
+      - ./metrics:/app/metrics               # access metrics/ if metrics/ used in local dev
+      - ./pipeline:/app/pipeline             # access pipeline/ functions
+    restart: unless-stopped
+
+  dashboard:
+    # Build configuration
+    build:
+      context: .
+      dockerfile: ./_streamlit-server/Dockerfile
+      args:
+        PORT_STREAMLIT_EXPOSED: ${PORT_STREAMLIT_EXPOSED}     # make variable callable during build in Dockerfile
+    image: ${STREAMLIT_IMAGE}
+    # Runtime configuration 
+    container_name: ${STREAMLIT_CONTAINER}
+    environment:
+      - PORT_STREAMLIT_EXPOSED=${PORT_STREAMLIT_EXPOSED}
+      - URL_API=http://api:${PORT_FASTAPI_EXTERNAL}   # overrides URL_API value set in .env - used in streamlit.py
+    # Networking & volumes
+    networks:
+      - app-network
+    ports:
+      - "${PORT_STREAMLIT_EXTERNAL}:${PORT_STREAMLIT_EXPOSED}"
+    volumes:
+      - ./_streamlit-server:/app/streamlit   # allows dashboard hot reload
+      - ./data:/app/data                     # access data/ if data/ used in local dev
+      - ./models:/app/models                 # access joblib models/ if models/ used in local dev
+      - ./metrics:/app/metrics               # access metrics/ if metrics/ used in local dev
+      - ./pipeline:/app/pipeline             # access pipeline/ functions
+    restart: unless-stopped
+
+  api-backend:
+    # Build configuration
+    build:
+      context: .
+      dockerfile: ./_fastapi-backend-server/Dockerfile
+      args:
+        PORT_FASTAPI_BACKEND_EXPOSED: ${PORT_FASTAPI_BACKEND_EXPOSED}   # make variable callable during build in Dockerfile
+    image: ${FASTAPI_BACKEND_IMAGE}
+    # Runtime configuration
+    container_name: ${FASTAPI_BACKEND_CONTAINER}
+    env_file:
+      - .env
+    environment:
+      - PORT_FASTAPI_BACKEND_EXPOSED=${PORT_FASTAPI_BACKEND_EXPOSED}
+      - PROJECT_ROOT=/app
+      - PROJECT_NAME=${PROJECT_NAME}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
+      - AWS_SECRET_KEY=${AWS_SECRET_KEY}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET}
+      - TRACKING_URI=http://mlflow-tracking:${PORT_MLFLOW_TRACKING_EXTERNAL}   # overrides TRACKING_URI value set in .env - used in streamlit.py
+    # Networking & volumes
+    networks:
+      - app-network
+    ports:
+      - "${PORT_FASTAPI_BACKEND_EXTERNAL}:${PORT_FASTAPI_BACKEND_EXPOSED}"
+    volumes:
+      - ./_fastapi-backend-server/src:/app/api-backend/src       # allows API hot reload
+      - ./_fastapi-servers-shared/src:/app/api-backend/src/shared    # mount shared routes - create shared dir if notit doesn't exist
+      - ./data:/app/data                            # access data/ if data/ used in local dev
+      - ./models:/app/models                        # access joblib models/ if models/ used in local dev
+      - ./metrics:/app/metrics                      # access metrics/ if metrics/ used in local dev
+      - ./pipeline:/app/pipeline                    # access pipeline/ functions
+    restart: unless-stopped
+
+  mlflow-tracking:
+    # Build configuration
+    build:
+      context: ./_mlflow-server
+      dockerfile: Dockerfile
+      args:
+        - PORT_MLFLOW_TRACKING_EXTERNAL=${PORT_MLFLOW_TRACKING_EXTERNAL}
+        - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
+        - AWS_SECRET_KEY=${AWS_SECRET_KEY}
+        - BACKEND_STORE_URI=${BACKEND_STORE_URI}
+        - ARTIFACT_ROOT=${ARTIFACT_ROOT}
+    image: ${MLFLOW_IMAGE}
+    # Runtime configuration
+    container_name: ${MLFLOW_CONTAINER}
+    env_file:
+      - .env
+    environment:
+      - MLFLOW_ALLOW_UNSAFE_HOSTS=true
+    # command: >
+    #   mlflow server --allowed-hosts "*"
+    # Networking & volumes
+    networks:
+      - app-network
+    ports:
+      - "${PORT_MLFLOW_TRACKING_EXTERNAL}:${PORT_MLFLOW_TRACKING_EXPOSED}"
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

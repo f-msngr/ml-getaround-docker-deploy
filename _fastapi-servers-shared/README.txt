@@ -1,0 +1,1 @@
+Directory contains shared routes between frontend server and backend server

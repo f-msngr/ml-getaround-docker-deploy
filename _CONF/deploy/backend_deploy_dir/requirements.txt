@@ -1,0 +1,19 @@
+# _CONF/deploy/backend_deploy_dir/requirements.txt
+# multiservices
+numpy
+pandas
+scikit-learn
+xgboost
+joblib
+dotenv
+# AWS S3
+boto3
+
+# FastAPI
+fastapi
+uvicorn
+python-multipart
+
+# MlFlow
+mlflow
+psycopg2-binary
