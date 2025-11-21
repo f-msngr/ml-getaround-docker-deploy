@@ -651,6 +651,7 @@ HF_MLFLOW_SERVER=<MLFLOW-SERVER-ML-DEPLMT-TEMPL>
 # git add, commit, push
 make push SERVER=mf MSG="Initial commit"
 ```
+[⬆ Back to top](#table-of-contents)
 
 ### Frontend Server space
 
@@ -671,6 +672,7 @@ HF_FE_SERVER=<FRONTEND-SERVER-ML-DEPLMT-TEMPL>
 # Create and push frontend server
 make push SERVER=fe MSG="Initial commit"
 ```
+[⬆ Back to top](#table-of-contents)
 
 ### Backend Server space
 
