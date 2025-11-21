@@ -58,11 +58,8 @@ In order to help them make the right decision, they are asking for some data ins
 - [Table of Contents](#table-of-contents)
   - [Tech Stack ⚙️](#tech-stack-️)
   - [ML project framework 🧩](#ml-project-framework-)
-  - [⬆ Back to top](#-back-to-top)
   - [Key Features ✨](#key-features-)
-  - [⬆ Back to top](#-back-to-top-1)
   - [Requirements 📋](#requirements-)
-  - [⬆ Back to top](#-back-to-top-2)
 - [Project Structure 🌳](#project-structure-)
     - [TL;DR](#tldr)
     - [Detailed structure](#detailed-structure)
@@ -103,7 +100,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 - 🔧 Local development support
 - 🚀 One-click deployment to Hugging Face Spaces (with Makefile and env variables)
 
-[⬆ Back to top](#table-of-contents)
+    [⬆ Back to top](#table-of-contents)
 ---
 ## Key Features ✨
 
@@ -116,7 +113,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 * 🌐 Single-port deployment via Nginx reverse proxy
 * 🤗 Optimized for Hugging Face Spaces multi-service architecture
 
-[⬆ Back to top](#table-of-contents)
+    [⬆ Back to top](#table-of-contents)
 ---
 ## Requirements 📋
 
@@ -128,7 +125,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 * Database (NeonDB or SQLite)
 * Hugging Face account
 
-[⬆ Back to top](#table-of-contents)
+    [⬆ Back to top](#table-of-contents)
 ---
 # Project Structure 🌳
 
@@ -496,7 +493,7 @@ Use notebooks in `notebooks` to run:
 
 Create New PostGRESQL Database (use of NeonDB here)  
 
-<img src='assets/screenshots/NeonDB_project_creation.png' alt='NeonDB_new_db_creation' width='500'>
+<img src='assets/screenshots/NeonDB_project_creation.png' alt='NeonDB_new_db_creation' width='300'>
 
 ```bash
 # Set connection string to your new database given by the db manager console 
@@ -511,7 +508,7 @@ make compose
 Open interface in browser with port `$PORT_NGINX_EXTERNAL` defined in .env (default port: 8088)  
 `http://localhost:8088/`
 
-<img src='assets/screenshots/home_local_dev.png' alt='local dev home page' width='500'>
+<img src='assets/screenshots/home_local_dev.png' alt='local dev home page' width='300'>
 
 [⬆ Back to top](#table-of-contents)
 
