@@ -4,6 +4,8 @@
 
 [GetAround](https://www.getaround.com/?wpsrc=Google+Organic+Search) is the Airbnb for cars. In 2019, they count over 5 million users and about 20K available cars worldwide.
 
+[Table of contents](#table-of-contents)
+
 ## Context 
 
 When renting a car, our users have to complete a checkin flow at the beginning of the rental and a checkout flow at the end of the rental in order to:
@@ -17,12 +19,15 @@ The checkin and checkout of our rentals can be done with three distinct flows:
 * **Connect:** the driver doesn’t meet the owner and opens the car with his smartphone
 * **📝 Paper** contract (negligible)
 
+[Table of contents](#table-of-contents)
+
 ## Project 🚧
 
 When using Getaround, drivers book cars for a specific time period, but it happens that drivers are late for the checkout.
 
 Late returns at checkout can generate high friction for the next driver if the next rental is on the same day : Customer service often reports users unsatisfaction because they have to wait and may need to cancel the rental.
 
+[Table of contents](#table-of-contents)
 
 ## Goals 🎯
 
@@ -41,6 +46,8 @@ In order to help them make the right decision, they are asking for some data ins
 * How often are drivers late for the next check-in? How does it impact the next driver?
 * How many problematic cases will it solve depending on the chosen threshold and scope?
 
+[Table of contents](#table-of-contents)
+
 ---
 # Table of Contents
 
@@ -51,8 +58,11 @@ In order to help them make the right decision, they are asking for some data ins
 - [Table of Contents](#table-of-contents)
   - [Tech Stack ⚙️](#tech-stack-️)
   - [ML project framework 🧩](#ml-project-framework-)
+  - [Back to Top](#back-to-top)
   - [Key Features ✨](#key-features-)
+  - [Back to Top](#back-to-top-1)
   - [Requirements 📋](#requirements-)
+  - [Back to Top](#back-to-top-2)
 - [Project Structure 🌳](#project-structure-)
     - [TL;DR](#tldr)
     - [Detailed structure](#detailed-structure)
@@ -93,7 +103,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 - 🔧 Local development support
 - 🚀 One-click deployment to Hugging Face Spaces (with Makefile and env variables)
   
-
+[Back to Top](#table-of-contents)
 ---
 ## Key Features ✨
 
@@ -106,8 +116,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 * 🌐 Single-port deployment via Nginx reverse proxy
 * 🤗 Optimized for Hugging Face Spaces multi-service architecture
 
-
-
+[Back to Top](#table-of-contents)
 ---
 ## Requirements 📋
 
@@ -119,8 +128,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 * Database (NeonDB or SQLite)
 * Hugging Face account
 
-
-
+[Back to Top](#table-of-contents)
 ---
 # Project Structure 🌳
 
@@ -140,6 +148,8 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 ├── metrics                         # use for local dev - switch to Backend store in deployment
 └── notebooks                       # local use, dev, and general test purposes
 ```
+
+[Back to Top](#table-of-contents)
 
 ### Detailed structure
 <details>
@@ -280,6 +290,7 @@ flowchart TB
 ```
 </details>
 
+[Back to Top](#table-of-contents)
 
 <details>
 <summary>🏗️ Local predeployment (click to expand)</summary>
@@ -345,6 +356,7 @@ flowchart TB
 ```
 </details>
 
+[Back to Top](#table-of-contents)
 
 <details>
 <summary>🤗 Hugging Face Spaces deployment (click to expand)</summary>
@@ -465,6 +477,8 @@ Used files:
             └── df_cars_transformed.pkl   # transformed dataset)
 
 
+[Back to Top](#table-of-contents)
+
 ### Notebooks  
 
 Use your Python environment (`.venv-YOUR_VIRTUAL_ENV_NAME`) with `ipykernel` support for notebooks.
@@ -550,6 +564,7 @@ This will remove all previous images, create 3 ready for deployment directories 
 - `frontend_deploy_dir/`: end user access (dashboard + basic API functionalities),
 - `backend_deploy_dir/`: developer access (ETL advanced API functionalities + MLFlow access)
 - `mlflow_deploy_dir/` : mlflow ready to deploy
+
 [Back to Top](#table-of-contents)
 
 ## Servers run (frontend + backend)
@@ -567,12 +582,13 @@ make help
 
 Open frontend interface in browser with port ```$PORT_REV_PROXY_FRONTEND_EXTERNAL``` defined in .env (default port: 7860):  
 `http://localhost:7860/`  
-<img src='assets/screenshots/home_local_deploy_frontend.png' alt='local deploy_frontend home page' width='500'>  
+<img src='assets/screenshots/home_local_deploy_frontend.png' alt='local deploy_frontend home page' width='300'>  
 
 Open backend interface in browser with port ```$PORT_REV_PROXY_BACKEND_EXTERNAL``` defined in .env (default port: 7861):  
 `http://localhost:7861/`  
-<img src='assets/screenshots/home_local_deploy_backend.png' alt='local deploy_backend home page' width='500'>
+<img src='assets/screenshots/home_local_deploy_backend.png' alt='local deploy_backend home page' width='300'>
 
+[Back to Top](#table-of-contents)
 
 ### Interactive mode - shell access
 
@@ -689,4 +705,5 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 # License 📜
 
 This project is licensed under the GPL3 License — see the [LICENSE](./LICENSE) file for details.
+
 [Back to Top](#table-of-contents)
