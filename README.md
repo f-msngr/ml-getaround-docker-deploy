@@ -1,6 +1,5 @@
 <img src='assets/screenshots/getaround_logo.png' alt='Getaround logo' width='500'>
 
-
 # GetAround 
 
 [GetAround](https://www.getaround.com/?wpsrc=Google+Organic+Search) is the Airbnb for cars. In 2019, they count over 5 million users and about 20K available cars worldwide.
@@ -42,13 +41,50 @@ In order to help them make the right decision, they are asking for some data ins
 * How often are drivers late for the next check-in? How does it impact the next driver?
 * How many problematic cases will it solve depending on the chosen threshold and scope?
 
+---
+# Table of Contents
 
-## ⚙️ Tech Stack
+- [GetAround](#getaround)
+  - [Context](#context)
+  - [Project 🚧](#project-)
+  - [Goals 🎯](#goals-)
+- [Table of Contents](#table-of-contents)
+  - [Tech Stack ⚙️](#tech-stack-️)
+  - [ML project framework 🧩](#ml-project-framework-)
+  - [Key Features ✨](#key-features-)
+  - [Requirements 📋](#requirements-)
+- [Project Structure 🌳](#project-structure-)
+    - [TL;DR](#tldr)
+    - [Detailed structure](#detailed-structure)
+    - [Deployment Workflows](#deployment-workflows)
+- [Quick Setup 🛠️](#quick-setup-️)
+    - [Installation](#installation)
+- [Local Development 🏠](#local-development-)
+    - [General](#general)
+    - [Notebooks](#notebooks)
+    - [Local development:](#local-development)
+- [Local Pre deployment 🏗️](#local-pre-deployment-️)
+    - [Build](#build)
+  - [Servers run (frontend + backend)](#servers-run-frontend--backend)
+    - [Interactive mode - shell access](#interactive-mode---shell-access)
+  - [MLFlow + deployment setup](#mlflow--deployment-setup)
+    - [AWS Setup](#aws-setup)
+    - [Database Setup (NeonDB)](#database-setup-neondb)
+    - [Environment Variables](#environment-variables)
+- [HuggingFace Spaces deployment 🤗](#huggingface-spaces-deployment-)
+    - [MLFlow Server space](#mlflow-server-space)
+    - [Frontend Server space](#frontend-server-space)
+    - [Backend Server space](#backend-server-space)
+- [Contributing 🤝](#contributing-)
+- [License 📜](#license-)
+
+
+## Tech Stack ⚙️
 
 [![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black)](https://www.linux.org/) [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/) [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)](https://www.docker.com/) [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/) [![Streamlit](https://img.shields.io/badge/Streamlit-%23FE4B4B.svg?style=flat&logo=streamlit&logoColor=white)](https://streamlit.io/) [![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=flat&logo=nginx&logoColor=white)](https://nginx.org/) [![MLflow](https://img.shields.io/badge/mlflow-%23d9ead3.svg?style=flat&logo=mlflow&logoColor=blue)](https://mlflow.org/) [![NeonDB](https://img.shields.io/badge/NeonDB-00E5FF?style=flat&logo=postgresql&logoColor=white)](https://neon.tech/) [![AWS Cloud](https://img.shields.io/badge/AWS%20Cloud-%23FF9900.svg?style=flat&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/) [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces)
 
 
-## 🧩 ML project framework
+## ML project framework 🧩
 
 Develop locally, deploy easily, dockerized production-ready ML deployment template with:
 - 🏗️ Microservices architecture (FastAPI + Streamlit + MLflow)
@@ -57,46 +93,9 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 - 🔧 Local development support
 - 🚀 One-click deployment to Hugging Face Spaces (with Makefile and env variables)
   
----
-# Table of Contents
-
-- [GetAround](#getaround)
-  - [Context](#context)
-  - [Project 🚧](#project-)
-  - [Goals 🎯](#goals-)
-  - [⚙️ Tech Stack](#️-tech-stack)
-  - [🧩 ML project framework](#-ml-project-framework)
-- [Table of Contents](#table-of-contents)
-  - [✨ Key Features](#-key-features)
-  - [📋 Requirements](#-requirements)
-- [🌳 Project Structure](#-project-structure)
-    - [TL;DR](#tldr)
-    - [Detailed structure](#detailed-structure)
-    - [Deployment Workflows](#deployment-workflows)
-- [🛠️ Quick Setup](#️-quick-setup)
-    - [Installation](#installation)
-- [🏠 Local Development](#-local-development)
-    - [General](#general)
-    - [Notebooks](#notebooks)
-    - [Local development:](#local-development)
-- [🏗️ Local Pre deployment](#️-local-pre-deployment)
-    - [Build](#build)
-  - [Servers run (frontend + backend)](#servers-run-frontend--backend)
-    - [Interactive mode - shell access](#interactive-mode---shell-access)
-  - [MLFlow + deployment setup](#mlflow--deployment-setup)
-    - [AWS Setup](#aws-setup)
-    - [Database Setup (NeonDB)](#database-setup-neondb)
-    - [Environment Variables](#environment-variables)
-- [🤗 HuggingFace Spaces deployment](#-huggingface-spaces-deployment)
-    - [MLFlow Server space](#mlflow-server-space)
-    - [Frontend Server space](#frontend-server-space)
-    - [Backend Server space](#backend-server-space)
-- [🤝 Contributing](#-contributing)
-- [📜 License](#-license)
-
 
 ---
-## ✨ Key Features
+## Key Features ✨
 
 * 🛠️ 2 modes: local development or deploy mode selected and launched: by Makefile
 * 📦 Modular backend/frontend separation (frontend: visualization and prediction / backend: ETL process)
@@ -110,7 +109,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 
 
 ---
-## 📋 Requirements
+## Requirements 📋
 
 * Linux (bash shell)
 * Python 3.8+
@@ -123,7 +122,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 
 
 ---
-# 🌳 Project Structure
+# Project Structure 🌳
 
 ### TL;DR 
 ```
@@ -404,7 +403,7 @@ flowchart TB
 [Back to Top](#table-of-contents)
 
 ---
-# 🛠️ Quick Setup
+# Quick Setup 🛠️
 
 ### Installation
 
@@ -442,7 +441,7 @@ nano .env
 
 
 ---
-# 🏠 Local Development
+# Local Development 🏠
 
 ### General
 
@@ -531,7 +530,7 @@ pip install -r _streamlit-server/requirements.txt
 
 
 ---
-# 🏗️ Local Pre deployment
+# Local Pre deployment 🏗️
 
 ### Build
 
@@ -615,7 +614,7 @@ BACKEND_STORE_URI=postgresql://user:pass@host:port/db
 [Back to Top](#table-of-contents)
 
 ---
-# 🤗 HuggingFace Spaces deployment
+# HuggingFace Spaces deployment 🤗
 
 Create New Blank Public Docker Space for each server on HF Space
 
@@ -683,11 +682,11 @@ make push SERVER=be MSG="Initial commit"
 [Back to Top](#table-of-contents)
 
 ---
-# 🤝 Contributing
+# Contributing 🤝
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
-# 📜 License
+# License 📜
 
 This project is licensed under the GPL3 License — see the [LICENSE](./LICENSE) file for details.
 [Back to Top](#table-of-contents)
