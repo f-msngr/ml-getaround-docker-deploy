@@ -113,7 +113,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 * 🌐 Single-port deployment via Nginx reverse proxy
 * 🤗 Optimized for Hugging Face Spaces multi-service architecture
 
-    [Back to Top](#table-of-contents)
+    [⬆ Back to top](#table-of-contents)
 ---
 ## Requirements 📋
 
@@ -146,7 +146,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 └── notebooks                       # local use, dev, and general test purposes
 ```
 
-    [⬆ Back to top](#table-of-contents)
+[⬆ Back to top](#table-of-contents)
 
 ### Detailed structure
 <details>
@@ -231,7 +231,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 
 </details>
 
-    [⬆ Back to top](#table-of-contents)
+[⬆ Back to top](#table-of-contents)
 
 
 ### Deployment Workflows
@@ -287,7 +287,7 @@ flowchart TB
 ```
 </details>
 
-    [⬆ Back to top](#table-of-contents)
+[⬆ Back to top](#table-of-contents)
 
 <details>
 <summary>🏗️ Local predeployment (click to expand)</summary>
@@ -353,7 +353,7 @@ flowchart TB
 ```
 </details>
 
-    [⬆ Back to top](#table-of-contents)
+[⬆ Back to top](#table-of-contents)
 
 <details>
 <summary>🤗 Hugging Face Spaces deployment (click to expand)</summary>
