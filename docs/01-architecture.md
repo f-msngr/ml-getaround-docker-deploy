@@ -40,6 +40,10 @@
 <summary>Detailed structure
  (click to expand)</summary>
 
+
+
+
+
     .
     ├── _CONF                           # backend & frontend services configuration for <u>deployment on HF Spaces</u>
     │   └── deploy
@@ -94,6 +98,12 @@
     │   └── raw
     |       ├── df_cars.pkl             # cars dataset
     │       └── df_rentals.pkl          # rentals dataset
+    ├── docs
+    │   ├── 01-architecture.md
+    │   ├── 02-prerequisites.md
+    │   ├── 03-local_development.md
+    │   ├── 04-pipeline.md
+    │   └── 05-deployment.md
     ├── pipeline                        # src dir for etl and train processing and general & reusable src (aws connection, )
     │   ├── core
     │   │   ├── src
