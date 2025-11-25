@@ -20,7 +20,7 @@ This pipeline is a **reusable ML deployment template**, not a showcase of advanc
 
 **Key principle:** Stub framework + plug your own logic.
 
----
+[⬆ Back to top](#table-of-contents)
 
 ## Quick Overview
 
@@ -44,7 +44,7 @@ predict.py (inference) → API → Dashboard
 - `extract.py` - TO BE REPLACED with your extraction logic
 - `transform.py` - TO BE REPLACED with your transformations
 
----
+[⬆ Back to top](#table-of-contents)
 
 ## For GetAround Specifically
 
@@ -59,7 +59,7 @@ predict.py (inference) → API → Dashboard
 
 **One-time cleanup:** `notebooks/ETL.ipynb` (outlier removal, cardinality reduction)
 
----
+[⬆ Back to top](#table-of-contents)
 
 ## How to Adapt This Template
 
@@ -90,7 +90,7 @@ predict.py (inference) → API → Dashboard
    make push SERVER=fe MSG="New project"
    ```
 
----
+[⬆ Back to top](#table-of-contents)
 
 ## Proof of Concept: Template Reusability
 
@@ -102,7 +102,8 @@ This architecture has been **successfully duplicated** on another project with m
 
 **Result:** 80% of code reused, 20% project-specific logic.
 
----
+
+[⬆ Back to top](#table-of-contents)
 
 ## Future Evolution (MLOps Vision)
 
@@ -118,7 +119,7 @@ Current structure is designed to integrate:
 - Dockerized services = easy CI/CD
 - MLflow tracking = production-ready
 
----
+[⬆ Back to top](#table-of-contents)
 
 ## Quick Reference
 
