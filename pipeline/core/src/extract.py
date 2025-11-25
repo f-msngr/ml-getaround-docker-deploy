@@ -23,7 +23,7 @@ def extract_pipeline():
     path_to_initial_raw_data = f'data/raw/data_to_extract.csv'
     dataset = get_from_bucket(path_to_initial_raw_data)
     
-    path_to_extracted_data = f'data/raw/extracted_data_converd_in_pkl.pkl'
+    path_to_extracted_data = f'data/raw/extracted_data_converted_in_pkl.pkl'
     save_to_bucket(dataset, path_to_extracted_data)   
     # *******************************************************************************************
 
