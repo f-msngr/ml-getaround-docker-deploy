@@ -9,8 +9,6 @@
 - [Project structure 🌳](#project-structure-)
   - [TL;DR](#tldr)
   - [Detailed structure](#detailed-structure)
-- [Deployment Workflows](#deployment-workflows)
-  - [Local development 🏠](#local-development-)
   - [Local predeployment 🏗️](#local-predeployment-️)
   - [Hugging Face Spaces deployment 🤗](#hugging-face-spaces-deployment-)
 
@@ -39,10 +37,7 @@
 <details>
 <summary>Detailed structure
  (click to expand)</summary>
-
-
-
-
+```
 
     .
     ├── _CONF                           # backend & frontend services configuration for <u>deployment on HF Spaces</u>

@@ -9,9 +9,7 @@
   - [Philosophy](#philosophy)
   - [Quick Overview](#quick-overview)
   - [For GetAround Specifically](#for-getaround-specifically)
-  - [How to Adapt This Template](#how-to-adapt-this-template)
-  - [Proof of Concept: Template Reusability](#proof-of-concept-template-reusability)
-  - [Future Evolution (MLOps Vision)](#future-evolution-mlops-vision)
+  - [API Integration](#api-integration)
   - [Quick Reference](#quick-reference)
 
 ## Philosophy
@@ -61,65 +59,24 @@ predict.py (inference) → API → Dashboard
 
 [⬆ Back to top](#table-of-contents)
 
-## How to Adapt This Template
+## API Integration
 
-1. **Replace datasets in S3:**
-   ```bash
-   s3://your-bucket/your-project/data/raw/your_data.pkl
-   ```
+Pipeline functions are exposed via FastAPI routes following this pattern:
+``` bash
+pipeline/core/src/*.py (business logic)
+    ↓
+_fastapi-servers-shared/src/route_*.py (shared endpoints)
+_fastapi-backend-server/src/route_*.py (backend-only endpoints)
+    ↓
+FastAPI servers (frontend uses shared, backend uses both)
+```
 
-2. **Modify `load.py`:**
-   ```python
-   def get_your_data():
-       path_to_data = f'data/raw/your_data.pkl'
-       return get_from_bucket(path_to_data)
-   ```
-
-3. **Update `train.py`:**
-   - Change target/features
-   - Swap LinearRegression for your model
-   - Adjust preprocessing
-
-4. **Update API routes:**
-   - `_fastapi-servers-shared/src/route_load.py`
-   - `_fastapi-servers-shared/src/route_predict.py`
-
-5. **Redeploy:**
-   ```bash
-   make build
-   make push SERVER=fe MSG="New project"
-   ```
+**Separation of concerns:**
+- **Shared routes** (`route_load`, `route_predict`) → Used by both servers
+- **Backend routes** (`route_extract`, `route_transform`, `route_train`) → ETL/ML workflows
 
 [⬆ Back to top](#table-of-contents)
 
-## Proof of Concept: Template Reusability
-
-This architecture has been **successfully duplicated** on another project with minimal changes:
-- Same Dockerfile structure
-- Same Makefile orchestration
-- Same deployment pipeline
-- Different datasets + model
-
-**Result:** 80% of code reused, 20% project-specific logic.
-
-
-[⬆ Back to top](#table-of-contents)
-
-## Future Evolution (MLOps Vision)
-
-Current structure is designed to integrate:
-
-**Testing:** `pipeline/*/tests/` directories ready for pytest  
-**CI/CD:** Jenkins integration planned  
-**Orchestration:** Airflow DAGs for scheduled retraining  
-**Monitoring:** MLflow metrics + alerting  
-
-**Why this matters:**
-- Clean separation of concerns (core vs libs)
-- Dockerized services = easy CI/CD
-- MLflow tracking = production-ready
-
-[⬆ Back to top](#table-of-contents)
 
 ## Quick Reference
 
