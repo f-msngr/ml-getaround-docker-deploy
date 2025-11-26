@@ -10,10 +10,6 @@
   - [Build](#build)
   - [Servers run (frontend + backend)](#servers-run-frontend--backend)
     - [Interactive mode - shell access](#interactive-mode---shell-access)
-  - [MLFlow + deployment setup](#mlflow--deployment-setup)
-    - [AWS Setup](#aws-setup)
-    - [Database Setup (NeonDB)](#database-setup-neondb)
-    - [Environment Variables](#environment-variables)
 - [HuggingFace Spaces deployment 🤗](#huggingface-spaces-deployment-)
   - [MLFlow Server space](#mlflow-server-space)
   - [Frontend Server space](#frontend-server-space)
@@ -79,33 +75,6 @@ make clean
 ```
 [⬆ Back to top](#table-of-contents)
 
-## MLFlow + deployment setup
-
-### AWS Setup  
-You should already have IAM + S3 from Local dev configuration steps.  
-1. Create IAM user with S3 permissions
-2. Generate access keys.  
-3. Create S3 bucket: `s3://your-bucket-name/your-project/`
-
-### Database Setup (NeonDB)
-1. Create account at neon.tech (for example)
-2. Create database
-3. Get connection string
-
-### Environment Variables
-Update your `.env` file:
-```bash
-# Edit and modify .env
-nano .env
-AWS_REGION=your-region
-AWS_ACCESS_KEY=your-key
-AWS_SECRET_KEY=your-secret
-ARTIFACT_ROOT=s3://your-bucket/artifacts
-BACKEND_STORE_URI=postgresql://user:pass@host:port/db
-```
-[⬆ Back to top](#table-of-contents)
-
-
 # HuggingFace Spaces deployment 🤗
 
 Create New Blank Public Docker Space for each server on HF Space
@@ -130,6 +99,7 @@ HF_MLFLOW_SERVER=<MLFLOW-SERVER-ML-DEPLMT-TEMPL>
 # git add, commit, push
 make push SERVER=mf MSG="Initial commit"
 ```
+
 [⬆ Back to top](#table-of-contents)
 
 ## Frontend Server space
@@ -151,6 +121,7 @@ HF_FE_SERVER=<FRONTEND-SERVER-ML-DEPLMT-TEMPL>
 # Create and push frontend server
 make push SERVER=fe MSG="Initial commit"
 ```
+
 [⬆ Back to top](#table-of-contents)
 
 ## Backend Server space
@@ -173,6 +144,5 @@ HF_BE_SERVER=<BACKEND-SERVER-ML-DEPLMT-TEMPL>
 # Create and push backend server
 make push SERVER=be MSG="Initial commit"
 ```
+
 [⬆ Back to top](#table-of-contents)
-
-
