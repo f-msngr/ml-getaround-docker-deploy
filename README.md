@@ -46,20 +46,16 @@ In order to help them make the right decision, they are asking for some data ins
 
 [Table of contents](#table-of-contents)
 
-# Preview
-
-<img src='assets/screenshots/preview.png' heigth='200'>
-
 # Table of Contents
 
 - [GetAround](#getaround)
   - [Context](#context)
   - [Project 🚧](#project-)
   - [Goals 🎯](#goals-)
-- [Preview](#preview)
 - [Table of Contents](#table-of-contents)
   - [Tech Stack ⚙️](#tech-stack-️)
   - [ML project framework 🧩](#ml-project-framework-)
+  - [Preview](#preview)
   - [Who Should Use This? 👥](#who-should-use-this-)
   - [Key Features ✨](#key-features-)
   - [Architecture Overview](#architecture-overview)
@@ -85,6 +81,11 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 - 🚀 One-click deployment to Hugging Face Spaces (with Makefile and env variables)
 
     [⬆ Back to top](#table-of-contents)
+
+## Preview
+
+<img src='assets/screenshots/preview.png' heigth='200'>
+
 
 ## Who Should Use This? 👥
 
