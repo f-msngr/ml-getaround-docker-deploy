@@ -6,6 +6,7 @@
 
 - [Deployment](#deployment)
 - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
 - [Local Pre deployment 🏗️](#local-pre-deployment-️)
   - [Build](#build)
   - [Servers run (frontend + backend)](#servers-run-frontend--backend)
@@ -15,7 +16,24 @@
   - [Frontend Server space](#frontend-server-space)
   - [Backend Server space](#backend-server-space)
 
+## Overview
 
+**Two stages:**
+1. **Local Pre-deployment** (`make build` + `make run`) - Test production images locally
+2. **HuggingFace Spaces** (`make push`) - Deploy tested images to cloud
+
+**Why test locally first?**
+- ✅ Validate `.env` configuration
+- ✅ Check MLflow connectivity
+- ✅ Debug without HF rebuild delays
+
+**Key difference vs local dev:**
+- ❌ No bind mounts (code baked in images)
+- ✅ Uses cloud resources (S3, NeonDB, HF MLflow)
+
+[⬆ Back to top](#table-of-contents)
+
+---
 # Local Pre deployment 🏗️
 
 ## Build
@@ -75,6 +93,7 @@ make clean
 ```
 [⬆ Back to top](#table-of-contents)
 
+---
 # HuggingFace Spaces deployment 🤗
 
 Create New Blank Public Docker Space for each server on HF Space

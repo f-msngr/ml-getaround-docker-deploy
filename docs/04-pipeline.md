@@ -8,9 +8,9 @@
 - [Table of Contents](#table-of-contents)
   - [Philosophy](#philosophy)
   - [Quick Overview](#quick-overview)
-  - [For GetAround Specifically](#for-getaround-specifically)
-  - [API Integration](#api-integration)
-  - [Quick Reference](#quick-reference)
+- [For GetAround Specifically](#for-getaround-specifically)
+- [API Integration](#api-integration)
+- [Quick Reference](#quick-reference)
 
 ## Philosophy
 
@@ -44,7 +44,8 @@ predict.py (inference) → API → Dashboard
 
 [⬆ Back to top](#table-of-contents)
 
-## For GetAround Specifically
+---
+# For GetAround Specifically
 
 **Datasets:**
 - `df_rentals.pkl` - Raw rental data (delay analysis)
@@ -59,7 +60,8 @@ predict.py (inference) → API → Dashboard
 
 [⬆ Back to top](#table-of-contents)
 
-## API Integration
+---
+# API Integration
 
 Pipeline functions are exposed via FastAPI routes following this pattern:
 ``` bash
@@ -77,8 +79,8 @@ FastAPI servers (frontend uses shared, backend uses both)
 
 [⬆ Back to top](#table-of-contents)
 
-
-## Quick Reference
+---
+# Quick Reference
 
 | File | Purpose | When to modify |
 |------|---------|----------------|

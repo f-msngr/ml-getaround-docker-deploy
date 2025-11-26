@@ -1,4 +1,4 @@
-<img src='assets/screenshots/getaround_logo.png' alt='Getaround logo' width='500'>
+<img src='assets/screenshots/getaround_logo.png' alt='Getaround logo' width='400'>
 
 # GetAround 
 
@@ -46,6 +46,7 @@ In order to help them make the right decision, they are asking for some data ins
 
 [Table of contents](#table-of-contents)
 
+---
 # Table of Contents
 
 - [GetAround](#getaround)
@@ -84,8 +85,8 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 
 ## Preview
 
-<img src='assets/screenshots/preview.png' heigth='200'>
-
+<img src='assets/screenshots/preview.png' width='800'>
+<img src='assets/screenshots/preview_dashboard_apis.png' width='800'>
 
 ## Who Should Use This? 👥
 

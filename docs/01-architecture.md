@@ -12,7 +12,7 @@
   - [Local predeployment 🏗️](#local-predeployment-️)
   - [Hugging Face Spaces deployment 🤗](#hugging-face-spaces-deployment-)
 
-
+---
 # Project structure 🌳
 
 ## TL;DR 
@@ -127,6 +127,7 @@
 
 [⬆ Back to top](#table-of-contents)
 
+---
 # Deployment Workflows
 
 ## Local development 🏠

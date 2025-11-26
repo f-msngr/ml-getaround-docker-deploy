@@ -7,10 +7,10 @@
 - [Prerequisites ☁️](#prerequisites-️)
 - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
-  - [AWS S3 Bucket](#aws-s3-bucket)
-  - [PostgreSQL Database](#postgresql-database)
-  - [HuggingFace Account](#huggingface-account)
-  - [Environment Configuration](#environment-configuration)
+- [AWS S3 Bucket](#aws-s3-bucket)
+- [PostgreSQL Database](#postgresql-database)
+- [HuggingFace Account](#huggingface-account)
+- [Environment Configuration](#environment-configuration)
 
 ## Overview
 
@@ -24,8 +24,7 @@ This project requires **external cloud resources** before you can run it locally
 [⬆ Back to top](#table-of-contents)
 
 ---
-
-## AWS S3 Bucket
+# AWS S3 Bucket
 
 **Steps:**
 
@@ -53,8 +52,7 @@ This project requires **external cloud resources** before you can run it locally
 [⬆ Back to top](#table-of-contents)
 
 ---
-
-## PostgreSQL Database
+# PostgreSQL Database
 
 **Recommended:** [NeonDB](https://neon.tech) (free tier, serverless)
 
@@ -79,8 +77,7 @@ This project requires **external cloud resources** before you can run it locally
 [⬆ Back to top](#table-of-contents)
 
 ---
-
-## HuggingFace Account
+# HuggingFace Account
 
 **Required for:** Production deployment only (skip for local dev)
 
@@ -96,8 +93,7 @@ This project requires **external cloud resources** before you can run it locally
 [⬆ Back to top](#table-of-contents)
 
 ---
-
-## Environment Configuration
+# Environment Configuration
 
 **Now configure `.env` with all values collected above:**
 ```bash
