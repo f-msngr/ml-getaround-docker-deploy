@@ -48,7 +48,7 @@ In order to help them make the right decision, they are asking for some data ins
 
 # Preview
 
-<img src='assets/screenshots/home_local_dev.png' width='300'>
+<img src='assets/screenshots/preview.png' heigth='200'>
 
 # Table of Contents
 
