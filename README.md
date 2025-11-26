@@ -102,9 +102,9 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 * Python 3.8+
 * pip
 * Docker with Compose V2
-* AWS account (for S3 bucket): see more info [Prerequisites](docs/02-prerequisites.md)
-* Database (NeonDB or SQLite): see more info [Prerequisites](docs/02-prerequisites.md)
-* Hugging Face account: see more info [Prerequisites](docs/02-prerequisites.md)
+* AWS account (for S3 bucket): see more info [Prerequisites](docs/02-prerequisites.md#aws-s3-bucket)
+* Database (NeonDB or SQLite): see more info [Prerequisites](docs/02-prerequisites.md#postgresql-database)
+* Hugging Face account: see more info [Prerequisites](docs/02-prerequisites.md#huggingface-account)
 
     [⬆ Back to top](#table-of-contents)
 
