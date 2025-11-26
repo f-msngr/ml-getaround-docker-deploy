@@ -61,7 +61,6 @@ In order to help them make the right decision, they are asking for some data ins
   - [Key Features ✨](#key-features-)
   - [Requirements 📋](#requirements-)
   - [Project docs 📚](#project-docs-)
-- [Project Structure 🌳](#project-structure-)
 - [Quick Setup 🛠️](#quick-setup-️)
     - [Installation](#installation)
 - [Contributing 🤝](#contributing-)
@@ -118,12 +117,6 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 * [Deployment](docs/05-deployment.md) - Howto build and run of deployment containers (local predeploy + cloud deploy stages)
     
     [⬆ Back to top](#table-of-contents)
-
-# Project Structure 🌳
-
-More information in [Architecture](docs/01-architecture.md)
-
-[⬆ Back to top](#table-of-contents)
 
 # Quick Setup 🛠️
 
