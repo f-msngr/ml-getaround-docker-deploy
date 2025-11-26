@@ -4,8 +4,6 @@
 
 [GetAround](https://www.getaround.com/?wpsrc=Google+Organic+Search) is the Airbnb for cars. In 2019, they count over 5 million users and about 20K available cars worldwide.
 
-[Table of contents](#table-of-contents)
-
 ## Context 
 
 When renting a car, our users have to complete a checkin flow at the beginning of the rental and a checkout flow at the end of the rental in order to:
@@ -48,6 +46,9 @@ In order to help them make the right decision, they are asking for some data ins
 
 [Table of contents](#table-of-contents)
 
+# Preview
+
+<img src='assets/screenshots/home_local_dev.png' width='300'>
 
 # Table of Contents
 
@@ -55,14 +56,16 @@ In order to help them make the right decision, they are asking for some data ins
   - [Context](#context)
   - [Project 🚧](#project-)
   - [Goals 🎯](#goals-)
+- [Preview](#preview)
 - [Table of Contents](#table-of-contents)
   - [Tech Stack ⚙️](#tech-stack-️)
   - [ML project framework 🧩](#ml-project-framework-)
+  - [Who Should Use This? 👥](#who-should-use-this-)
   - [Key Features ✨](#key-features-)
+  - [Architecture Overview](#architecture-overview)
   - [Requirements 📋](#requirements-)
   - [Project docs 📚](#project-docs-)
-- [Quick Setup 🛠️](#quick-setup-️)
-    - [Installation](#installation)
+- [Getting Started 🚀](#getting-started-)
 - [Contributing 🤝](#contributing-)
 - [License 📜](#license-)
 
@@ -83,6 +86,20 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 
     [⬆ Back to top](#table-of-contents)
 
+## Who Should Use This? 👥
+
+**✅ This is for you if:**
+- You're deploying ML models as microservices
+- You need reproducible ML pipelines with MLflow
+- You want a scalable architecture template
+
+**❌ Not for:**
+- ML learning projects (too complex for beginners)
+- Single-script models (overkill)
+- Quick prototypes
+
+**Setup complexity:** 2-4 hours (first time)
+
 ## Key Features ✨
 
 * 🛠️ 2 modes: local development or deploy mode selected and launched: by Makefile
@@ -96,6 +113,22 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 * 🎯 **Makefile orchestration**: `make compose` (local dev), `make build` (predeploy), `make push` (HF deploy) - workflows detailed in [Architecture](docs/01-architecture.md)
 
     [⬆ Back to top](#table-of-contents)
+
+## Architecture Overview
+```mermaid
+graph LR
+    Dev[Developer] --> Local[Local Dev<br/>make compose]
+    Local --> PreDeploy[Test Deploy<br/>make build + run]
+    PreDeploy --> Prod[Production<br/>make push]
+    
+    Local -.->|uses| S3[S3 Bucket]
+    Local -.->|uses| DB[NeonDB]
+    Prod -->|deploys to| HF[HuggingFace<br/>Spaces]
+```
+
+**Full details:** [Architecture docs →](docs/01-architecture.md)
+
+[⬆ Back to top](#table-of-contents)
 
 ## Requirements 📋
 
@@ -119,26 +152,22 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
     
     [⬆ Back to top](#table-of-contents)
 
-# Quick Setup 🛠️
+# Getting Started 🚀
 
-### Installation
+**Estimated time:** 2-4 hours (first setup)
 
+1. **Prerequisites** (30-60 min) → [Setup cloud resources](docs/02-prerequisites.md)
+2. **Local Development** (30 min) → [Run locally](docs/03-local_development.md)  
+3. **Deployment** (60 min) → [Deploy to production](docs/05-deployment.md)
+
+**Or just explore:**
 ```bash
-# Check Docker installation
-docker --version
-docker compose version
-
-# Go to parent cloning directory
-mkdir YOUR_PARENT_CLONING_DIR
-
-# Clone the project
 git clone https://github.com/Fabthenabab/ml-getaround-docker-deploy.git
 cd ml-getaround-docker-deploy
+make  # See all commands
 ```
-Setup your bucket. More information in [Prerequisites](docs/02-prerequisites.md)
 
 [⬆ Back to top](#table-of-contents)
-
 
 # Contributing 🤝
 
