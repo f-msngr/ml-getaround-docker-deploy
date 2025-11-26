@@ -93,6 +93,7 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 * 🧪 Experiment tracking via MLflow
 * 🌐 Single-port deployment via Nginx reverse proxy
 * 🤗 Optimized for Hugging Face Spaces multi-services architecture
+* 🎯 **Makefile orchestration**: `make compose` (local dev), `make build` (predeploy), `make push` (HF deploy) - workflows detailed in [Architecture](docs/01-architecture.md)
 
     [⬆ Back to top](#table-of-contents)
 

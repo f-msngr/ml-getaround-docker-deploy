@@ -68,7 +68,6 @@ Use notebooks in `notebooks` to run:
 
 [⬆ Back to top](#table-of-contents)
 
-
 # Compose
 
 ```bash
