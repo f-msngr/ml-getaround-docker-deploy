@@ -1,7 +1,5 @@
 <img src='assets/screenshots/getaround_logo.png' alt='Getaround logo' width='400'>
 
-# GetAround 
-
 # GetAround - MLOps Deployment Framework
 
 > **3-phase Docker deployment template (local → predeploy → cloud) demonstrating 
@@ -12,7 +10,6 @@
 ---
 # Table of Contents
 
-- [GetAround](#getaround)
 - [GetAround - MLOps Deployment Framework](#getaround---mlops-deployment-framework)
 - [Table of Contents](#table-of-contents)
   - [🎯 About](#-about)
