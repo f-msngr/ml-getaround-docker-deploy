@@ -2,47 +2,10 @@
 
 # GetAround 
 
-[GetAround](https://www.getaround.com/?wpsrc=Google+Organic+Search) is the Airbnb for cars. In 2019, they count over 5 million users and about 20K available cars worldwide.
+# GetAround - MLOps Deployment Framework
 
-## Context 
-
-When renting a car, our users have to complete a checkin flow at the beginning of the rental and a checkout flow at the end of the rental in order to:
-
-* Assess the state of the car and notify other parties of pre-existing damages or damages that occurred during the rental.
-* Compare fuel levels.
-* Measure how many kilometers were driven.
-
-The checkin and checkout of our rentals can be done with three distinct flows:
-* **📱 Mobile** rental agreement on native apps: driver and owner meet and both sign the rental agreement on the owner’s smartphone
-* **Connect:** the driver doesn’t meet the owner and opens the car with his smartphone
-* **📝 Paper** contract (negligible)
-
-[Table of contents](#table-of-contents)
-
-## Project 🚧
-
-When using Getaround, drivers book cars for a specific time period, but it happens that drivers are late for the checkout.
-
-Late returns at checkout can generate high friction for the next driver if the next rental is on the same day : Customer service often reports users unsatisfaction because they have to wait and may need to cancel the rental.
-
-[Table of contents](#table-of-contents)
-
-## Goals 🎯
-
-In order to mitigate those issues we’ve decided to implement a minimum delay between two rentals. A car won’t be displayed in the search results if the requested checkin or checkout times are too close from an already booked rental.
-
-It solves the late checkout issue but also potentially hurts Getaround/owners revenues: we need to find the right trade off.
-
-**Our Product Manager still needs to decide:**
-* **threshold:** how long should the minimum delay be?
-* **scope:** should we enable the feature for all cars?, only Connect cars?
-
-In order to help them make the right decision, they are asking for some data insights:
-
-* Which share of our owner’s revenue would potentially be affected by the feature?
-* How many rentals would be affected by the feature depending on the threshold and scope we choose?
-* How often are drivers late for the next check-in? How does it impact the next driver?
-* How many problematic cases will it solve depending on the chosen threshold and scope?
+> **3-phase Docker deployment template (local → predeploy → cloud) demonstrating 
+> production-grade MLOps architecture on a rental optimization business case.**
 
 [Table of contents](#table-of-contents)
 
@@ -50,14 +13,13 @@ In order to help them make the right decision, they are asking for some data ins
 # Table of Contents
 
 - [GetAround](#getaround)
-  - [Context](#context)
-  - [Project 🚧](#project-)
-  - [Goals 🎯](#goals-)
+- [GetAround - MLOps Deployment Framework](#getaround---mlops-deployment-framework)
 - [Table of Contents](#table-of-contents)
+  - [🎯 About](#-about)
+  - [🎯 Project Goals](#-project-goals)
   - [Tech Stack ⚙️](#tech-stack-️)
   - [ML project framework 🧩](#ml-project-framework-)
   - [Preview](#preview)
-  - [Who Should Use This? 👥](#who-should-use-this-)
   - [Key Features ✨](#key-features-)
   - [Architecture Overview](#architecture-overview)
   - [Requirements 📋](#requirements-)
@@ -65,7 +27,24 @@ In order to help them make the right decision, they are asking for some data ins
 - [Getting Started 🚀](#getting-started-)
 - [Contributing 🤝](#contributing-)
 - [License 📜](#license-)
+  - [🎓 Portfolio Context](#-portfolio-context)
 
+
+## 🎯 About
+**Business context** (2-3 lignes seulement) :
+GetAround rental delays impact user satisfaction and revenue. This project implements 
+ML-based delay prediction and threshold optimization.
+
+**Technical focus** :
+Production-ready MLOps template showcasing:
+- 3-phase deployment workflow (local dev → predeploy validation → HF Spaces)
+- Microservices architecture (FastAPI + Streamlit + MLflow + Nginx)
+- Reproducible ETL pipelines with experiment tracking
+
+## 🎯 Project Goals
+1. **Architecture**: Build reusable multi-container deployment template
+2. **MLOps**: Implement complete ML lifecycle (ETL → training → serving → monitoring)
+3. **Business**: Predict rental delays and optimize minimum delay thresholds
 
 ## Tech Stack ⚙️
 
@@ -88,33 +67,28 @@ Develop locally, deploy easily, dockerized production-ready ML deployment templa
 <img src='assets/screenshots/preview.png' width='800'>
 <img src='assets/screenshots/preview_dashboard_apis.png' width='800'>
 
-## Who Should Use This? 👥
-
-**✅ This is for you if:**
-- You're deploying ML models as microservices
-- You need reproducible ML pipelines with MLflow
-- You want a scalable architecture template
-
-**❌ Not for:**
-- ML learning projects (too complex for beginners)
-- Single-script models (overkill)
-- Quick prototypes
 
 **Setup complexity:** 2-4 hours (first time)
 
 ## Key Features ✨
 
-* 🛠️ 2 modes: local development or deploy mode selected and launched: by Makefile
-* 📦 Modular backend/frontend separation (frontend: visualization and prediction / backend: ETL process)
-* 🐳 Dockerized services (nginx, FastAPI, Streamlit, MLflow)
-* 🔁 Reproducible ETL pipeline
-* ☁️ AWS S3 + NeonDB support
-* 🧪 Experiment tracking via MLflow
-* 🌐 Single-port deployment via Nginx reverse proxy
-* 🤗 Optimized for Hugging Face Spaces multi-services architecture
-* 🎯 **Makefile orchestration**: `make compose` (local dev), `make build` (predeploy), `make push` (HF deploy) - workflows detailed in [Architecture](docs/01-architecture.md)
+**Deployment Framework:**
+- 3-phase workflow: `make compose` (local) → `make build` (test) → `make push` (prod)
+- Single-port access via Nginx reverse proxy
+- Environment-aware configuration (.env switching)
 
-    [⬆ Back to top](#table-of-contents)
+**MLOps Pipeline:**
+- Complete ETL with S3 + NeonDB integration
+- MLflow experiment tracking
+- FastAPI REST endpoints
+- Streamlit dashboard
+
+**Code Quality:**
+- Modular backend/frontend separation
+- Docker Compose orchestration
+- Makefile automation
+  
+[⬆ Back to top](#table-of-contents)
 
 ## Architecture Overview
 ```mermaid
@@ -131,6 +105,7 @@ graph LR
 **Full details:** [Architecture docs →](docs/01-architecture.md)
 
 [⬆ Back to top](#table-of-contents)
+
 
 ## Requirements 📋
 
@@ -180,3 +155,19 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 This project is licensed under the GPL3 License — see the [LICENSE](./LICENSE) file for details.
 
 [⬆ Back to top](#table-of-contents)
+
+## 🎓 Portfolio Context
+**Project Type:** MLOps Architecture & Deployment Framework  
+**Focus:** Production deployment patterns over ML sophistication
+
+**Demonstrates:**
+- Multi-phase deployment workflow design (local → cloud)
+- Microservices orchestration (Docker Compose + Nginx)
+- MLOps best practices (tracking, serving, monitoring)
+- Infrastructure as Code (Makefile automation)
+- Cloud deployment (HuggingFace Spaces multi-container)
+
+📚 **Part of [Fab's Data Science Portfolio](https://github.com/fabthenabab)** — 
+7 projects covering the full ML lifecycle from research to production.
+
+[⬆ Back to top](#-table-of-contents)
