@@ -5,8 +5,6 @@
 > **3-phase Docker deployment template (local → predeploy → cloud) demonstrating 
 > production-grade MLOps architecture on a rental optimization business case.**
 
-[Table of contents](#table-of-contents)
-
 ---
 # Table of Contents
 
