@@ -14,6 +14,9 @@
   - [🎯 Project Goals](#-project-goals)
   - [⚙️ Tech Stack](#️-tech-stack)
   - [✨ Key Features](#-key-features)
+    - [**Deployment Framework:**](#deployment-framework)
+    - [**MLOps Pipeline:**](#mlops-pipeline)
+    - [**Code Quality:**](#code-quality)
   - [Architecture Overview](#architecture-overview)
   - [Preview](#preview)
   - [📚 Project docs](#-project-docs)
@@ -46,22 +49,22 @@ Production-ready MLOps template showcasing:
 
 ## ✨ Key Features
 
-- **Deployment Framework:**
-    3-phase workflow: `make compose` (local) → `make build` (test) → `make push` (prod)
-    Single-port access via Nginx reverse proxy
-    Environment-aware configuration (.env switching)
+### **Deployment Framework:**
+- **3-phase workflow**: `make compose` (local) → `make build` (test) → `make push` (prod)
+- **Single-port access** via Nginx reverse proxy
+- **Environment-aware** configuration (.env switching)
 
-- **MLOps Pipeline:**
-    Complete ETL with S3 + NeonDB integration
-    MLflow experiment tracking
-    FastAPI REST endpoints
-    Streamlit dashboard
+### **MLOps Pipeline:**
+- **Complete ETL** with S3 + NeonDB integration
+- **MLflow** experiment tracking
+- **FastAPI** REST endpoints
+- **Streamlit** dashboard
 
-- **Code Quality:**
-    Microservices architecture (FastAPI + Streamlit + MLflow)
-    Modular backend/frontend separation
-    Docker Compose orchestration
-    Makefile automation
+### **Code Quality:**
+- **Microservices architecture** (FastAPI + Streamlit + MLflow)
+- **Modular** backend/frontend separation
+- **Docker Compose** orchestration
+- **Makefile** automation
   
 [⬆ Back to top](#table-of-contents)
 
@@ -146,4 +149,4 @@ This project is licensed under the GPL3 License — see the [LICENSE](./LICENSE)
 📚 **Part of [Fab's Data Science Portfolio](https://github.com/fabthenabab)** — 
 7 projects covering the full ML lifecycle from research to production.
 
-[⬆ Back to top](#-table-of-contents)
+[⬆ Back to top](#table-of-contents)
