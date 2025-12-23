@@ -89,7 +89,7 @@ graph LR
 <img src='assets/screenshots/preview.png' width='800'>
 <img src='assets/screenshots/preview_dashboard_apis.png' width='800'>
 
-    [⬆ Back to top](#table-of-contents)
+[⬆ Back to top](#table-of-contents)
 
 ## 📚 Project docs
 
@@ -98,8 +98,8 @@ graph LR
 * [Local development](docs/03-local_development.md) - Howto build and run local development environment (notebooks + docker compose)
 * [Pipeline ETL & ML + utils](docs/04-pipeline.md) - Core libraries implemented for the project
 * [Deployment](docs/05-deployment.md) - Howto build and run of deployment containers (local predeploy + cloud deploy stages)
-    
-    [⬆ Back to top](#table-of-contents)
+
+[⬆ Back to top](#table-of-contents)
 
 ## 🚀 Getting Started
 
