@@ -1,1 +1,0 @@
-Directory automatically created for ML core by makefile

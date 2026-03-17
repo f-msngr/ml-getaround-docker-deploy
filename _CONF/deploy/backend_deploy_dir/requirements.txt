@@ -1,19 +1,19 @@
 # _CONF/deploy/backend_deploy_dir/requirements.txt
 # multiservices
-numpy
-pandas
-scikit-learn
-xgboost
-joblib
-dotenv
+numpy==2.3.3
+pandas==2.3.2
+scikit-learn==1.7.2
+xgboost==3.1.1
+joblib==1.5.2
+dotenv==0.9.9
 # AWS S3
-boto3
+boto3==1.40.40
 
 # FastAPI
-fastapi
-uvicorn
-python-multipart
+fastapi==0.117.1
+uvicorn==0.37.0
+python-multipart==0.0.20
 
 # MlFlow
 mlflow
-psycopg2-binary
+psycopg2-binary==2.9.10
