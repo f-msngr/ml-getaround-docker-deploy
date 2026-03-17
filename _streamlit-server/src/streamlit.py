@@ -2,6 +2,7 @@ import os
 import streamlit as st
 
 import requests
+import json
 import joblib
 import numpy as np
 import pandas as pd
@@ -18,125 +19,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-st.markdown("""
-<style>
-/* Force white text globally */
-* {
-    color: white !important;
-}
-
-/* Background gradient */
-.stApp {
-    background: linear-gradient(135deg, #4a5568 0%, #553c9a 100%) !important;
-}
-
-/* Force text color in all common elements */
-p, span, div, label, li, td, th, h1, h2, h3, h4, h5, h6 {
-    color: white !important;
-}
-
-/* Streamlit specific elements */
-[data-testid="stMarkdownContainer"] p,
-[data-testid="stText"],
-.stMarkdown,
-[data-testid="stExpander"] {
-    color: white !important;
-}
-
-/* Main containers */
-section.main > div.block-container {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-    padding: 2rem;
-}
-
-/* Sidebar */
-[data-testid="stSidebar"] {
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(15px);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-[data-testid="stSidebar"] * {
-    color: white !important;
-}
-
-/* Metric blocks */
-div[data-testid="metric-container"] {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 1rem;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-div[data-testid="metric-container"] * {
-    color: white !important;
-}
-
-/* Expander */
-[data-testid="stExpander"] {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-}
-
-[data-testid="stExpander"] * {
-    color: white !important;
-}
-
-/* Buttons */
-.stButton > button {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
-    color: white !important;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.stButton > button:hover {
-    background: linear-gradient(135deg, #10b981, #34d399);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
-}
-
-/* Headers */
-h1, h2, h3 {
-    background: linear-gradient(45deg, #ffffff, #e0e6ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Input fields */
-input, textarea {
-    color: white !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-/* Charts */
-.js-plotly-plot {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-}
-</style>
-""", unsafe_allow_html=True)
-
-# ************************************************************************************************************
-# CACHE
-# Load model
-# @st.cache_resource
-# def load_model():
-#    return joblib.load("/app/models/model.pkl")
-#
-# model = load_model()"""
 
 # ************************************************************************************************************
 # ENV
@@ -151,6 +33,120 @@ input, textarea {
 url_api = os.getenv("URL_API")
 
 # ************************************************************************************************************
+# CACHE
+# Load model
+# @st.cache_resource
+# def load_model():
+#    return joblib.load("/app/models/model.pkl")
+#
+# model = load_model()"""
+
+# Fetch data as json from API
+@st.cache_data
+def fetch_rentals_stats(url_api=url_api):
+    # API call via entry point (ep)
+    ep_rentals_stats = f'{url_api}/rentals_stats'
+    return requests.get(ep_rentals_stats).json() # Waiting for json format
+
+@st.cache_data
+def fetch_cars_stats(url_api=url_api):
+    # API call via entry point (ep)
+    ep_cars_stats = f'{url_api}/cars_stats'
+    return requests.get(ep_cars_stats).json() # Waiting for json format
+
+@st.cache_data
+def fetch_rentals(url_api=url_api):
+    return requests.get(f'{url_api}/rentals').json() # Waiting for json format
+
+@st.cache_data
+def fetch_cars(url_api=url_api):
+    return requests.get(f'{url_api}/cars').json() # Waiting for json format
+
+# Get json data
+js_rentals_stats = fetch_rentals_stats()
+js_cars_stats = fetch_cars_stats()
+js_rentals = fetch_rentals()
+js_cars = fetch_cars()
+
+
+# Compute = convert json to dataframes
+@st.cache_data
+def compute_rentals_df(js_rentals):
+    df = pd.DataFrame(js_rentals)
+    return df
+
+@st.cache_data
+def compute_merged(js_rentals):
+    df = pd.DataFrame(js_rentals)
+    df_merged = pd.merge(
+        df,
+        df[["rental_id", "delay_at_checkout"]],
+        how='left',
+        left_on='previous_ended_rental_id',
+        right_on='rental_id',
+        suffixes=('_current', '_previous')
+    )
+        # Rename columns
+    l_cols = ['rental_id', 'car_id', 'checkin_type', 'state',
+        'delay_at_checkout', 'previous_ended_rental_id',
+        'delta_with_previous', 'rental_id_previous',
+        'previous_delay']
+    df_merged.columns = l_cols
+    # Drop redundant joint key column
+    df_merged.drop("rental_id_previous", axis=1, inplace=True) 
+
+    # Identify ovelaps conflicts case in a new column
+    df_merged["checkin_conflict"] = (
+        df_merged["previous_delay"].notna() &
+        df_merged["delta_with_previous"].notna() &
+        (df_merged["previous_delay"] > df_merged["delta_with_previous"])
+        )
+    return df_merged
+
+@st.cache_data
+def compute_cancel_rates(js_rentals_json):
+    df_merged = compute_merged(js_rentals_json)
+    # Create df of cancellations rates
+    # Filter only rentals with a previous rental ie previous_delay notna
+    return (
+        df_merged[df_merged["previous_delay"].notna()]
+        .groupby("checkin_conflict")["state"]
+        .value_counts(normalize=True)
+        .rename("ratio")
+        .reset_index()
+    )
+
+@st.cache_data
+def compute_cancel_rates_by_checkin(js_rentals_json):
+    df_merged = compute_merged(js_rentals_json)
+    # Get cancellation rates by checkin_conflict AND checkin_type
+    return (
+        df_merged[df_merged["previous_delay"].notna()]
+        .groupby(["checkin_type", "checkin_conflict"])["state"]
+        .value_counts(normalize=True)
+        .rename("ratio")
+        .reset_index()
+    )
+
+@st.cache_data
+def compute_cars(js_cars):
+    return pd.DataFrame(js_cars)
+
+@st.cache_data  
+def compute_cars_connect(js_cars):
+    df = pd.DataFrame(js_cars)
+    return df[df["has_getaround_connect"] == True].copy()
+
+
+df_rentals = compute_rentals_df(js_rentals)
+df_rentals_merged = compute_merged(js_rentals)
+df_conflict_cancel_rates = compute_cancel_rates(js_rentals)
+df_conflict_cancel_rates_by_checkin_type = compute_cancel_rates_by_checkin(js_rentals)
+df_cars = compute_cars(js_cars)
+df_cars_connect = compute_cars_connect(js_cars)
+
+
+# ************************************************************************************************************
 if st.button("⬅️ Accueil", key="back_button"):
         st.markdown('<meta http-equiv="refresh" content="0; url=/" />', unsafe_allow_html=True)
 
@@ -161,15 +157,9 @@ st.title("🚗 Getaround Dashboard")
 # Display rentals dataset structure
 with st.expander("Rentals dataset structure"):
     
-    # API call via entry point (ep)
-    ep_rentals_stats = f'{url_api}/rentals_stats'
-    resp_rentals_stats = requests.get(ep_rentals_stats)    # Waiting for json format
-    js_rentals_stats = resp_rentals_stats.json()
-    
     if st.button("Get structure", key="rentals_structure"):
-        st.json(js_rentals_stats)
-    
-    
+        st.code(json.dumps(js_rentals_stats, indent=2), language="json")
+
     
     rental_id = st.text_input('Get rental id:')
     if st.button("Get one rental"):
@@ -179,7 +169,7 @@ with st.expander("Rentals dataset structure"):
             resp = requests.get(ep_rental_by_id)
 
             if resp.status_code == 200:
-                st.write(resp.json())
+                st.code(json.dumps(resp.json(), indent=2), language="json")
             else:
                 st.error(f"Rental ID {rental_id} not found (code {resp.status_code}).")
 
@@ -187,48 +177,17 @@ with st.expander("Rentals dataset structure"):
             st.warning("Enter valid rental_id.")
 
          
-
-# ************************************************************************************************************
-# Display rentals
-with st.expander("Get all rentals"):
-    
-    ep_rentals = f'{url_api}/rentals'
-    resp_rentals = requests.get(ep_rentals)
-    js_rentals = resp_rentals.json()
-    
-    if st.button("Get all rentals"):
-        st.write(js_rentals)
-
-
 # ************************************************************************************************************
 # Display cars dataset structure
 with st.expander("Cars dataset structure"):
     
-    # API call via entry point (ep)
-    ep_cars_stats = f'{url_api}/cars_stats'
-    resp_cars_stats = requests.get(ep_cars_stats)    # Waiting for json format
-    js_cars_stats = resp_cars_stats.json()
-    
     if st.button("Get structure", key="cars_structure"):
-        st.json(js_cars_stats)
-
-
-# ************************************************************************************************************
-# Display cars
-with st.expander("Get all cars"):
-    
-    ep_cars = f'{url_api}/cars'
-    resp_cars = requests.get(ep_cars)
-    js_cars = resp_cars.json()
-    
-    if st.button("Get all cars"):
-        st.write(js_cars)
+        st.code(json.dumps(js_cars_stats, indent=2), language="json")
 
 
 # ************************************************************************************************************
 # Q1
 with st.expander("🎚️ 1. Rentals affected by a threshold setup "):
-    df_rentals = pd.DataFrame(js_rentals)
     
     # Select connect checkin
     mask = df_rentals["checkin_type"] == 'connect'
@@ -262,7 +221,7 @@ with st.expander("🎚️ 1. Rentals affected by a threshold setup "):
         margin=dict(l=10, r=10, t=40, b=10)  # left, right, top, bottom
         )
     # Streamlit display style
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     
     ###############################################
     # Use of np.where - different condition
@@ -291,7 +250,7 @@ with st.expander("🎚️ 1. Rentals affected by a threshold setup "):
         margin=dict(l=10, r=10, t=40, b=10)  # left, right, top, bottom
         )
     # Streamlit display style
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
 
     df_rentals.drop("threshold", axis=1, inplace=True)
 
@@ -299,7 +258,7 @@ with st.expander("🎚️ 1. Rentals affected by a threshold setup "):
 # ************************************************************************************************************
 # Q2
 with st.expander("🕒 2. Drivers being late for the next check in - Impact on the next driver"):
-    st.write("Sur l'ensemble des locations avec une heure de retour renseignée (delay_at_checkout non nulle), on observe le ratio retard/avance.")
+    st.write("Sur l'ensemble des locations avec une heure de retour renseignée (delay_at_checkout non nul), on observe le ratio retard/avance.")
     # Get all the rentals, even the cars rented only once a day
     # Get the rentals for which we know the delay at checkout
     df_rentals_noNA = df_rentals.loc[df_rentals["delay_at_checkout"].notna()].copy()
@@ -322,7 +281,7 @@ with st.expander("🕒 2. Drivers being late for the next check in - Impact on t
         margin=dict(l=10, r=10, t=40, b=10)  # left, right, top, bottom
         )
     # Streamlit display style
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     st.write("Pour étudier l'impact du retard sur la location suivante, il faut sélectionner les voitures qui sont utilisées plusieurs fois dans la même journée.")
     st.divider()
         
@@ -345,7 +304,7 @@ with st.expander("🕒 2. Drivers being late for the next check in - Impact on t
         margin=dict(l=10, r=10, t=40, b=10)  # left, right, top, bottom
         )
     # Streamlit display style
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     
     st.write("Drivers are late more than half of the time")
     st.write("Pour étudier l'impact sur la location suivante d'un retour hors délai prévu, il faut référencer le delay_at_checkout de la précédente location dans une colonne pour la location courante.\
@@ -355,45 +314,10 @@ with st.expander("🕒 2. Drivers being late for the next check in - Impact on t
     
     #####################################
     # Merge current rental info and the previous rental of the same car if possible
-    df_rentals_merged = pd.merge(
-        df_rentals,
-        df_rentals[["rental_id", "delay_at_checkout"]],
-        how='left',
-        left_on='previous_ended_rental_id',
-        right_on='rental_id',
-        suffixes=('_current', '_previous')
-        )
-    print(df_rentals_merged.columns)
-
-    # Rename columns
-    l_cols = ['rental_id', 'car_id', 'checkin_type', 'state',
-        'delay_at_checkout', 'previous_ended_rental_id',
-        'delta_with_previous', 'rental_id_previous',
-        'previous_delay']
-    df_rentals_merged.columns = l_cols
-    # Drop redundant joint key column
-    df_rentals_merged.drop("rental_id_previous", axis=1, inplace=True) 
-
-    # Identify ovelaps conflicts case in a new column
-    df_rentals_merged["checkin_conflict"] = (
-        df_rentals_merged["previous_delay"].notna() &
-        df_rentals_merged["delta_with_previous"].notna() &
-        (df_rentals_merged["previous_delay"] > df_rentals_merged["delta_with_previous"])
-        )
     st.write("On peut étudier les taux d'annulation de location en fonction des conflits de checkin")
     st.divider()
     
-
     #####################################
-    # Create df of cancellations rates
-    # Filter only rentals with a previous rental ie previous_delay notna
-    df_conflict_cancel_rates = df_rentals_merged[df_rentals_merged["previous_delay"].notna()]\
-        .groupby("checkin_conflict")["state"]\
-        .value_counts(normalize=True)\
-        .rename("ratio")\
-        .reset_index()
-    print(len(df_rentals_merged))
-
     # Visualize
     fig = px.bar(
         df_conflict_cancel_rates,
@@ -412,7 +336,7 @@ with st.expander("🕒 2. Drivers being late for the next check in - Impact on t
         legend_title_text="Rental state"
     )
     # Streamlit display style
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     
     st.write("Il y a 6 points d'annulations supplémentaires en cas de dépassement du delta prévu pour le retour de location.\
             Est-ce que ce taux est différent selon le mode de location (checkin_type) ?")
@@ -420,16 +344,6 @@ with st.expander("🕒 2. Drivers being late for the next check in - Impact on t
     
     
     #####################################
-    # Get cancellation rates by checkin_conflict AND checkin_type
-    df_conflict_cancel_rates_by_checkin_type = (
-        df_rentals_merged[df_rentals_merged["previous_delay"].notna()]
-        .groupby(["checkin_type", "checkin_conflict"])["state"]
-        .value_counts(normalize=True)
-        .rename("ratio")
-        .reset_index()
-    )
-    df_conflict_cancel_rates_by_checkin_type
-
     fig = px.bar(
         df_conflict_cancel_rates_by_checkin_type,
         x="checkin_conflict",
@@ -449,7 +363,7 @@ with st.expander("🕒 2. Drivers being late for the next check in - Impact on t
         legend_title_text="Rental state"
     )
     # Streamlit display style
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     st.write("Les locations par connect débouchent sur des annulations plus nombreuses en cas de dépassement de délai que les locations par mobile.")
 
 
@@ -485,7 +399,7 @@ with st.expander("🧩 3. Number of problematic cases solved depending on the th
     fig.update_traces(textposition="outside")
     fig.update_layout(margin=dict(l=10, r=10, t=40, b=10))
     # Streamlit display style
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     st.divider()
         
     ###############################################
@@ -525,7 +439,7 @@ with st.expander("🧩 3. Number of problematic cases solved depending on the th
     fig.update_traces(textposition="outside")
     fig.update_layout(margin=dict(l=10, r=10, t=50, b=10))
     # Streamlit display style
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     st.write("Le nombre de cas problématiques suit la même tendance entre connect et mobile.\
             Un seuil de 60min résoud les 2/3 de cas problématiques.")
  
@@ -543,10 +457,6 @@ with st.expander("💸 4. Share of our owner’s revenue would potentially be af
         "on peut visualiser et analyser les prix de location de ces voitures."
         )
 
-    # Select in dataset cars, cars with the connect option
-    df_cars = pd.DataFrame(js_cars)
-    
-    df_cars_connect = df_cars[df_cars["has_getaround_connect"] == True]
     total_connect_cars = len(df_cars_connect)
     st.write(f"Number of cars with connect option: {total_connect_cars}")
 
@@ -572,7 +482,7 @@ with st.expander("💸 4. Share of our owner’s revenue would potentially be af
         )
     fig.update_layout(margin=dict(l=10, r=10, t=50, b=10))
     # Streamlit display style
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     st.divider()
         
     ###############################################
@@ -682,7 +592,7 @@ with st.expander("💸 4. Share of our owner’s revenue would potentially be af
             height=350
             )
     fig.update_layout(margin=dict(l=10, r=10, t=50, b=10))
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     st.divider()
     
     st.markdown("""
@@ -699,13 +609,6 @@ with st.expander("💸 4. Share of our owner’s revenue would potentially be af
 # Predict
 with st.expander("🔮 Predict"):
     st.write("🚗 Car Rental Price Prediction (Linear Regression)")
-    
-    # Get values from dataset cars
-    # Get cars dataset from API call
-    ep_cars = f"{url_api}/cars"
-    resp_cars = requests.get(ep_cars)
-    js_cars = resp_cars.json()
-    df_cars = pd.DataFrame(js_cars)
     
     # Get unique values in categorical columns
     l_cat_cols = ["model_key", "fuel", "paint_color", "car_type"]
