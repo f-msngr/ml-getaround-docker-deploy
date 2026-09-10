@@ -2,7 +2,7 @@
 
 # GetAround - MLOps Deployment Framework
 
-> **3-phase Docker deployment template (local → predeploy → cloud) demonstrating 
+> **3-phases Docker deployment template (local → predeploy → cloud) demonstrating 
 > production-grade MLOps architecture on a rental optimization business case.**
 
 ---
@@ -34,7 +34,7 @@ ML-based delay prediction and threshold optimization.
 
 **Technical focus** :
 Production-ready MLOps template showcasing:
-- 3-phase deployment workflow (local dev → predeploy validation → HF Spaces)
+- 3-phases deployment workflow (local dev → predeploy validation → HF Spaces)
 - Microservices architecture (FastAPI + Streamlit + MLflow + Nginx)
 - Reproducible ETL pipelines with experiment tracking
 
@@ -119,7 +119,7 @@ graph LR
 
 - **Or just explore:**
   ```bash
-  git clone https://github.com/Fabthenabab/ml-getaround-docker-deploy.git
+  git clone https://github.com/f-msngr/ml-getaround-docker-deploy.git
   cd ml-getaround-docker-deploy
   make  # See all commands
   ```
