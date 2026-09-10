@@ -24,6 +24,7 @@
   - [🤝 Contributing](#-contributing)
   - [📜 License](#-license)
   - [🎓 Portfolio Context](#-portfolio-context)
+  - [Author](#author)
 
 
 ## 🎯 About
@@ -146,7 +147,9 @@ This project is licensed under the GPL3 License — see the [LICENSE](./LICENSE)
 - Infrastructure as Code (Makefile automation)
 - Cloud deployment (HuggingFace Spaces multi-container)
 
-📚 **Part of [Fab's Data Science Portfolio](https://github.com/fabthenabab)** — 
-7 projects covering the full ML lifecycle from research to production.
+## Author
+
+**Fabien Messinger** — Data Engineer, certified AI Architect (RNCP7, Jedha)
+[GitHub](https://github.com/f-msngr) · [LinkedIn](https://www.linkedin.com/in/fabien-messinger)
 
 [⬆ Back to top](#table-of-contents)
